@@ -33,13 +33,24 @@ class Chusqer extends Model
         return $this->belongsToMany(Hashtag::class);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function disLikes()
+    {
+        return $this->hasMany(Unlike::class);
+    }
+
+
     public function getImageAttribute($image)
     {
-        if( starts_with($image, "https://")){
+        if (starts_with($image, "https://")) {
             return $image;
         }
 
-        return  Storage::disk('public')->url($image);
+        return Storage::disk('public')->url($image);
     }
 
     public function toSearchableArray()
@@ -48,5 +59,29 @@ class Chusqer extends Model
 
         return $this->toArray();
     }
+
+    public function howManyLikes($id)
+    {
+        $likes = Like::where(['chusqer_id' => $id])->get();
+        return sizeof($likes);
+    }
+
+    public function isLikedByUser(User $user)
+    {
+        $likes = $this->likes()->get();
+        $likesByUser = $likes->whereIn('user_id', $user->id);
+        return sizeof($likesByUser) !== 0;
+    }
+
+    public function isUnlikedByUser(User $user)
+    {
+
+        $unlikes = $this->dislikes();
+        $unlikesByUser = $unlikes->where('user_id', $user->id)->get();
+
+        return sizeof($unlikesByUser) !== 0;
+    }
+
+
 
 }

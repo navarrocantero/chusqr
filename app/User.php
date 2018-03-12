@@ -36,6 +36,16 @@ class User extends Authenticatable
         return $this->hasMany(Chusqer::class)->latest();
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function disLikes()
+    {
+        return $this->hasMany(Unlike::class);
+    }
+
     /**
      * Quién sigue un usuario.
      *
@@ -43,7 +53,7 @@ class User extends Authenticatable
      */
     public function follows()
     {
-       return $this->belongsToMany(User::class, 'followers', 'user_id', 'followed_id');
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'followed_id');
     }
 
     /**

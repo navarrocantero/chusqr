@@ -15,6 +15,7 @@
 
 Route::get('/', 'PagesController@home')->name('home');
 Route::get('/saludo', 'PagesController@saludo');
+Route::get('/chusqers/likes/{id}', 'LikeController@show');
 
 
 Route::get('/hashtag/{hashtag}', 'HashtagController@index');
@@ -26,6 +27,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/chusqers/create', 'ChusqersController@create');
     Route::post('/chusqers/create', 'ChusqersController@store');
+    Route::post('/chusqers/like/{id}', 'LikeController@store')->name('chusqers.fav');
+    Route::delete('/chusqers/like/{id}', 'LikeController@delete')->name('chusqers.unfav');
     Route::get('/chusqers/{chusqer}/edit', 'ChusqersController@edit')->name('chusqers.edit');
     Route::patch('/chusqers/{chusqer}', 'ChusqersController@patch')->name('chusqers.patch');
     Route::delete('/chusqers/{chusqer}', 'ChusqersController@destroy')->name('chusqers.delete');

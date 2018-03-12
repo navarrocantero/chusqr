@@ -57,4 +57,5 @@ class ChusqersPolicy
     {
         return $user->id == $chusqer->user_id;
     }
+
 }

@@ -8,7 +8,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="{{ url('/') }}/css/foundation.css">
     <link rel="stylesheet" href="{{ url('/') }}/css/app.css">
-</head>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 <body>
 <div class="grid-container">
     <div class="top-bar">
